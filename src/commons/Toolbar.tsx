@@ -5,6 +5,7 @@ import encabezado from '../assets/encabezado.png';
 import logo from '../assets/logos/Logo-LVDL.png';
 import { useState, useContext } from 'react';
 import { UserStore, UserStoreProvider } from '../stores/users/UserStore';
+import Modal from './Modal';
 
 function ToolbarComponent(props: any) {
     const {state, dispatch} = useContext(UserStore);
@@ -12,6 +13,7 @@ function ToolbarComponent(props: any) {
     const [showLogin, setShowLogin] = useState(false)
     const [user, setUser] = useState('')
     const [pass, setPass] = useState('')
+    const [register, showRegister] = useState(false)
     const baseURL = 'http://localhost:8080/'
     
     const logOut = () => {
@@ -47,6 +49,24 @@ function ToolbarComponent(props: any) {
             }
         })
     }
+    
+    const postUser = async (user: string, pass: string) => {
+        const creat = {nick: user, password: pass, creation: true}
+        await fetch (baseURL+'usuarios',{
+            method: 'POST',
+            body: JSON.stringify(creat)
+            }
+        ).then((res) => {
+            if(res.ok){
+                res.json().then(data => {
+                    return dispatch({
+                        type: 'REG',
+                        payload: data
+                    })
+                })
+            }
+        })
+    }
 
     return(<>
         {props.children}
@@ -78,7 +98,10 @@ function ToolbarComponent(props: any) {
                                 e.preventDefault()
                                 !showLogin ? setShowLogin(true) : login()
                                 }}>Ingresar</button>
-                            <button className='toolbar-button'>Registrar</button>
+                            <button className='toolbar-button' onClick={(e) => {
+                                e.preventDefault()
+                                showRegister(!register)
+                            }}>Registrar</button>
                         </form>  
                         : <div className='toolbar-right'>
                             <h3 className='user-name'> Hola {state.nick} </h3> 
@@ -88,6 +111,11 @@ function ToolbarComponent(props: any) {
                             }}/>
                         </div>
                     }
+                <Modal 
+                    modalState={register} 
+                    show={showRegister} 
+                    postUser={postUser}
+                />
             </div>
     </>)
 }
@@ -95,7 +123,7 @@ function ToolbarComponent(props: any) {
 export default function Toolbar(props: any) {
     return(
     <UserStoreProvider>
-        <ToolbarComponent />
         {props.children}
+        <ToolbarComponent />
     </UserStoreProvider>)
 }

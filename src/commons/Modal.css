@@ -1,0 +1,73 @@
+.overlay{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    vertical-align: middle;
+    display: flex;
+}
+
+.container{
+    width: auto;
+    min-height: 50vh;
+    background: white;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+    padding: 20px;
+}
+
+.modal-logo{
+    width: 200px;
+    height: auto;
+    padding-left: 32px;
+}
+
+.modal-form{
+    padding: 20px;
+    display: grid;
+}
+
+.modal-close {
+    top: 0;
+    left: 0;
+    display: flex;
+    background-color: whitesmoke;
+}
+
+.modal-input{
+    color: white;
+    border-radius: 20px;
+    height: 35px;
+    width: 200px;
+    margin: 10px;
+    padding-left: 10px;
+    align-items: center;
+    border: darkgoldenrod;
+    background-color: #cca881;
+}
+
+.modal-button{
+    color: white;
+    border-radius: 20px;
+    height: auto;
+    margin: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+    text-align: center;
+    border: darkgoldenrod;
+    background-color: #614928;
+}
+
+.section-buttons{
+    height: auto;
+    width: auto;
+    padding: 10px;
+    text-align: center;
+    align-items: center;
+}

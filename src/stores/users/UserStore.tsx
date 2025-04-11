@@ -18,6 +18,9 @@ function userReducer(state: IUser, action: IUserAction): IUser {
         case 'OUT': {
             return {nick: '', pass: '', admin: false, loged: false}
         }
+        case 'REG': {
+            return { nick: action.payload.nick, pass: '', admin: action.payload.admin ,loged: true}
+        }
         default: return {...state}
     }
 }
