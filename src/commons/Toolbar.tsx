@@ -6,6 +6,7 @@ import logo from '../assets/logos/Logo-LVDL.png';
 import { useState, useContext } from 'react';
 import { UserStore, UserStoreProvider } from '../stores/users/UserStore';
 import Modal from './Modal';
+import Error from './Error';
 
 function ToolbarComponent(props: any) {
     const {state, dispatch} = useContext(UserStore);
@@ -14,6 +15,8 @@ function ToolbarComponent(props: any) {
     const [user, setUser] = useState('')
     const [pass, setPass] = useState('')
     const [register, showRegister] = useState(false)
+    const [error, setError] = useState('')
+    const [showError, setShowError] = useState(false)
     const baseURL = 'http://localhost:8080/'
     
     const logOut = () => {
@@ -36,7 +39,8 @@ function ToolbarComponent(props: any) {
         ).then(res => {
             if(res.ok){
                 setLoged(true)
-                setShowLogin(true)
+                setShowLogin(false)
+                setShowError(false)
                 res.json().then(data => {
                     return dispatch({
                         type: 'LOGIN',
@@ -44,8 +48,12 @@ function ToolbarComponent(props: any) {
                     })
                 })
             } else {
+                setPass('')
+                setUser('')
                 setLoged(false)
-                setShowLogin(true)
+                setShowLogin(false)
+                setError("Algo ha ido mal, vuelve a intentarlo")
+                setShowError(true)
             }
         })
     }
@@ -57,13 +65,22 @@ function ToolbarComponent(props: any) {
             body: JSON.stringify(creat)
             }
         ).then((res) => {
+            console.log(res)
             if(res.ok){
+                setShowError(false)
                 res.json().then(data => {
                     return dispatch({
                         type: 'REG',
                         payload: data
                     })
                 })
+            } else {
+                setPass('')
+                setUser('')
+                showRegister(false)
+                setShowLogin(false)
+                setError("Algo ha ido mal, vuelve a intentarlo")
+                setShowError(true)
             }
         })
     }
@@ -115,6 +132,11 @@ function ToolbarComponent(props: any) {
                     modalState={register} 
                     show={showRegister} 
                     postUser={postUser}
+                />
+                <Error 
+                    errorState={showError}
+                    error={error} 
+                    show={setShowError}
                 />
             </div>
     </>)

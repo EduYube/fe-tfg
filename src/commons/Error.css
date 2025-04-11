@@ -1,0 +1,33 @@
+.overlay{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    padding: 40px;
+}
+
+.error-container{
+    width: auto;
+    height:min-content;
+    background-color: #cca881;
+    border-color: darkgoldenrod;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+    text-align: center;
+}
+
+.error-text {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+    margin-bottom: 50px;
+}
+
+.error-close {
+    height: fit-content;
+    background-color: whitesmoke;
+}
