@@ -17,10 +17,6 @@
     color: #61dafb;
   }
   
-  .spacer {
-    height: 250px;
-  }
-  
   .main-nav{
     background-color: #cca881;
     display: flex;
@@ -73,5 +69,36 @@
     margin-right: 20px;
     height: 40px;
     width: auto;
+  }
+  .ciudades {
+    display: inline;
+    width: 100vw;
+    height: auto;
+  }
+  
+  .ciudades-img{
+    display: inline;
+    width: 450px;
+    border-radius: 20px;
+    height: auto;
+    margin: 30px;
+  }
+  
+  .ciudades-title {
+    font-size: 32px;
+    margin-right: 75%;
+    color: #614928;
+  }
+  
+  .spacer {
+    height: 250px;
+  }
+  
+  
+  .img-post{
+    width: 450px;
+    border-radius: 20px;
+    height: auto;
+    margin: 30px;
   }
   
