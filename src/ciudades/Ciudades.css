@@ -1,0 +1,39 @@
+.ciudad-button {
+    background-color: rgb(204, 168, 129);
+      font-family: 'Poppins';
+      font-size: x-large;
+      margin: 150px;
+      margin-top: 0px;
+      margin-bottom: 200px;
+      border-radius: 50px;
+      height: auto;
+      width: 300px;
+      border-width: 3px;
+      border-color: #614928;
+  }  
+  
+  .spacer {
+    height: 250px;
+  }
+  .section{
+    background-color: #cca881;
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-top: 175px;
+    z-index: 999;
+    width: 100%;
+  }
+  .section-title {
+    font-family: 'Poppins';
+    color: #614928;
+    font-size: x-large;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    background-color: #cca881;
+  }

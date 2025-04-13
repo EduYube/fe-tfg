@@ -1,5 +1,6 @@
 import React, {useReducer} from "react"
 import { ICiudades, ICiudadesAction } from "./CiudadIData";
+import { useLogin } from "../users/UserStore";
 
 const initialState: ICiudades = {
     ciudades: []
@@ -11,6 +12,12 @@ function ciudadesReducer(ciudadesState: ICiudades, action: ICiudadesAction): ICi
         case 'GET': {
             return {...ciudadesState, ciudades: action.payload}
         }
+        case 'PUT': {
+            return {...ciudadesState, ciudades: action.payload}
+        }
+        case 'POST': {
+            return {...ciudadesState, ciudades: action.payload}
+        }
         default: {
             return {...ciudadesState}
         }
@@ -19,5 +26,6 @@ function ciudadesReducer(ciudadesState: ICiudades, action: ICiudadesAction): ICi
 
 export function CiudadesStoreProvider(props: any) {
     const [ciudadesState, dispatch] = useReducer(ciudadesReducer, initialState)
-    return (<CiudadesStore.Provider value={{ ciudadesState, dispatch}}>{props.children}</CiudadesStore.Provider>)
+    const {state: userState} = useLogin()
+    return (<CiudadesStore.Provider value={{ ciudadesState, dispatch, admin: userState.admin == 1}}>{props.children}</CiudadesStore.Provider>)
 }
