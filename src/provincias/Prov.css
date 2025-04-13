@@ -1,0 +1,54 @@
+.ciudades {
+    display: inline;
+    width: 100vw;
+    height: auto;
+  }
+  
+  .ciudades-img{
+    display: inline;
+    width: 450px;
+    border-radius: 20px;
+    height: auto;
+    margin: 30px;
+  }
+  
+  .ciudades-title {
+    font-size: 32px;
+    margin-right: 75%;
+    color: #614928;
+  }
+  .spacer {
+    height: 250px;
+  }
+  .section{
+    background-color: #cca881;
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-top: 175px;
+    z-index: 999;
+    width: 100%;
+  }
+  .section-title {
+    font-family: 'Poppins';
+    color: #614928;
+    font-size: x-large;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    background-color: #cca881;
+  }
+
+  .crear-button{
+      color: white;
+      border-radius: 20px;
+      margin: 10px;
+      display: inline;
+      align-items: center;
+      text-align: center;
+      background-color: #614928;
+  }

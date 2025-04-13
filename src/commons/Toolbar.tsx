@@ -145,7 +145,7 @@ function ToolbarComponent(props: any) {
 export default function Toolbar(props: any) {
     return(
     <UserStoreProvider>
-        {props.children}
         <ToolbarComponent />
+        {props.children}
     </UserStoreProvider>)
 }

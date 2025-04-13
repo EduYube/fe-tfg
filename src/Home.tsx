@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { CiudadesStore, CiudadesStoreProvider } from './stores/ciudades/CiudadStore'
 import { ICiudad } from './stores/ciudades/CiudadIData'
+import { Link } from 'react-router-dom'
 import logoIg from './assets/logos/Logo-Insta.png'
 import logoX from './assets/logos/Logo-Twitter.png'
 import logoPin from './assets/logos/Logo-Pinterest.png'
@@ -40,7 +41,7 @@ const Home = () => {
     }
     return (<>
       <div className='main-nav'>
-        <p className='nav-text'>Destinos</p>
+      <Link className='nav-text' to='/provincias'>Destinos</Link>
         <button className='nav-text'>Sobre Nosotros</button>
         <p className='nav-separator'> | </p>
         <div className='nav-icons'>
