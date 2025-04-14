@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import provs from '../commons/ProvImgs'
 import CreateModal from '../commons/CreateModal'
+import Error from "../commons/Error"
 import './Prov.css'
 
 const Provincias = () => {
@@ -19,6 +20,8 @@ const Provincias = () => {
 const ProvinciasComp = () => {
     const [modal, showModal] = useState(false)
     const [crear, setCrear] = useState(false)
+    const [error, setError] = useState('')
+    const [showError, setShowError] = useState(false)
     const {provState, dispatch, admin} = useContext(ProvStore);
     const url = 'http://localhost:8080/provincias/'
     useEffect(() => {
@@ -37,7 +40,7 @@ const ProvinciasComp = () => {
     }
     const postProvData = async (name: string) => {
         const payload = JSON.stringify({
-        name: name
+        nombre: name
         })
         await fetch(url, {
             method: 'POST',
@@ -45,11 +48,10 @@ const ProvinciasComp = () => {
             }).then((res) => {
             if(res.ok){
                 getProvData()
+            } else {
+                setError('No se ha podido crear la provincia')
+                setShowError(true)
             }
-            return dispatch({
-            type: 'POST',
-            payload: payload
-            })
         })
     } 
     const putProvData = async(oldProv: string, newProv: string) => {
@@ -58,15 +60,24 @@ const ProvinciasComp = () => {
                 return prov
             }
         })
-        if(oldProv)
+        if(oldProv){
             await fetch(url+oldVal.id, {
                 method: 'PUT',
-                body: JSON.stringify({name: newProv})
+                body: JSON.stringify({nombre: newProv})
                 }).then((res) => {
                 if(res.ok) {
                     getProvData()
+                } else {
+                    res.json().then((data) => {
+                        setError(data.error.message)
+                        setShowError(true)
+                    })
                 }
             })
+        } else {
+            setError('No existe la provinca a modificar')
+            setShowError(true)
+        }
     }
 
     function Provincia(_: any){
@@ -84,6 +95,13 @@ const ProvinciasComp = () => {
     }
 
     return(<>  
+            <CreateModal 
+                modalState ={modal}
+                crear = {crear}
+                show={showModal}
+                postModal={postProvData}
+                putModal={putProvData}
+            />
         <div className='section'>
             <p className='section-title'>DESTINOS</p>
             { admin && 
@@ -107,12 +125,10 @@ const ProvinciasComp = () => {
                    return( <Provincia value={prov} key={prov.id} />)
                 })
             }
-            <CreateModal 
-                modalState ={modal}
-                crear = {crear}
-                show={showModal}
-                postModal={postProvData}
-                putModal={putProvData}
+            <Error 
+                errorState={showError}
+                error={error} 
+                show={setShowError}
             />
     </>)
 }

@@ -12,6 +12,13 @@ function provReducer(provState: IProvincias, provAction: IProvinciaAction): IPro
         case 'GET': {
             return{ ...provState, provincias: provAction.payload}
         }
+
+        case 'POST': {
+            return{ ...provState, provincias: provAction.payload}
+        }
+        case 'PUT': {
+            return{ ...provState, provincias: provAction.payload}
+        }
         default: return provState
     }
 }
