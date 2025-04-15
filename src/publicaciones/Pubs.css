@@ -1,0 +1,80 @@
+
+.img-post{
+    margin-left: auto;
+    margin-right: auto;
+    width: 450px;
+    border-radius: 20px;
+    height: auto;
+    margin: 30px;
+  }
+  .spacer {
+    height: 250px;
+  }
+
+  .section{
+    background-color: #cca881;
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-top: 175px;
+    z-index: 999;
+    width: 100%;
+  }
+  .section-title {
+    font-family: 'Poppins';
+    color: #614928;
+    font-size: x-large;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    background-color: #cca881;
+  }
+  .main-nav{
+    background-color: #cca881;
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-top: 175px;
+    z-index: 999;
+    width: 100%;
+  }
+  .comment-box {
+    width: 33vw;
+    border-radius: 20px;
+    height: 200px;
+    margin: 30px;
+  }
+  .comment{
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+    display: inline;
+    align-items: center;
+    text-align: center;
+  }
+  .section-comments {
+    width: 200px;
+    font-family: 'Poppins';
+    color: #614928;
+    font-size: x-large;
+    margin-left: 25px;
+    margin-right: auto;
+    background-color: #cca881;
+  }
+  .comment-text{
+    width: fit-content;
+    border-radius: 20px;
+    border-width: 3px;
+    background-color: #cca881;
+    padding: 20px;
+    margin-left: 25px;
+    margin-right: auto;
+  }
