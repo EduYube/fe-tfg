@@ -12,8 +12,8 @@
       border-color: #614928;
   }  
   
-  .spacer {
-    height: 250px;
+  .cities-spacer {
+    height: 25px;
   }
   .section{
     background-color: #cca881;
@@ -21,11 +21,9 @@
     align-items: center;
     width: 100vw;
     height: 50px;
-    position: fixed;
     top: 0;
     left: 0;
     margin-top: 175px;
-    z-index: 999;
     width: 100%;
   }
   .section-title {

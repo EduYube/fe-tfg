@@ -38,7 +38,7 @@ const CiudadesComp = () => {
     const postCiudadesData = async (name: string) => {
         const provId = ciudadesState.ciudades.find((ciudad: ICiudad) => ciudad.provincia.toLowerCase() == prov).id
         const payload = JSON.stringify({
-        name: name,
+        nombre: name,
         provinciaId: provId
         })
         await fetch(url, {
@@ -60,7 +60,7 @@ const CiudadesComp = () => {
         if(oldVal)
             await fetch(url+oldVal.id, {
                 method: 'PUT',
-                body: JSON.stringify({name: newCity})
+                body: JSON.stringify({nombre: newCity})
                 }).then((res) => {
                     if(res.ok){
                         getCiudadesData()
@@ -93,7 +93,7 @@ const CiudadesComp = () => {
                 </div>
             }
         </div>
-        <div className='spacer' />
+        <div className='cities-spacer' />
         {
             ciudadesState.ciudades.map((ciudad: ICiudad) => {
                 if (ciudad.provincia.toLowerCase() == prov) {

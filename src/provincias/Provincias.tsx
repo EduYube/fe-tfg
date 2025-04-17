@@ -95,13 +95,6 @@ const ProvinciasComp = () => {
     }
 
     return(<>  
-            <CreateModal 
-                modalState ={modal}
-                crear = {crear}
-                show={showModal}
-                postModal={postProvData}
-                putModal={putProvData}
-            />
         <div className='section'>
             <p className='section-title'>DESTINOS</p>
             { admin && 
@@ -119,17 +112,23 @@ const ProvinciasComp = () => {
                 </div>
             }
         </div>
-        <div className='spacer' />
-            {
-                provState.provincias.map((prov :IProvincia) => {
-                   return( <Provincia value={prov} key={prov.id} />)
-                })
-            }
-            <Error 
-                errorState={showError}
-                error={error} 
-                show={setShowError}
-            />
+        {
+            provState.provincias.map((prov :IProvincia) => {
+                return( <Provincia value={prov} key={prov.id} />)
+            })
+        }
+        <CreateModal 
+            modalState ={modal}
+            crear = {crear}
+            show={showModal}
+            postModal={postProvData}
+            putModal={putProvData}
+        />
+        <Error 
+            errorState={showError}
+            error={error} 
+            show={setShowError}
+        />
     </>)
 }
 

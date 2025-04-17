@@ -28,19 +28,21 @@ const PubsComp = () => {
         await fetch(url+id).then((res) => {
             if(res.ok){
               res.json().then((data) => {
-                setPub(data[0])
-                return dispatch({
-                  type: 'GET',
-                  payload: data
-                })
-              })
-            } else {
-                setCrear(true)
-                showModal(true)
-                return dispatch({
+                if(data.length > 0){
+                    setPub(data[0])
+                    return dispatch({
                     type: 'GET',
-                    payload: {name: ''}
-                })
+                    payload: data
+                    })
+                }  else {
+                    setCrear(true)
+                    showModal(true)
+                    return dispatch({
+                        type: 'GET',
+                        payload: {name: ''}
+                    })
+                }
+              })
             }
           })
     }
@@ -76,8 +78,6 @@ const PubsComp = () => {
                 </div>
             }
         </div>
-        <div className="spacer
-        "/>
         { pub ?
             <div>
                 <img className='img-post' src={image(pubImg)} />
@@ -93,7 +93,7 @@ const PubsComp = () => {
                 setCrear(true)
             }}> CREAR PUBLICACIÓN</button> 
         }
-        { loged &&
+        { loged && !showModal &&
         <div className='comment'>
             <textarea className="comment-box" maxLength={500}/>
             <button className="crear-button">Enviar</button>

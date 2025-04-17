@@ -53,7 +53,6 @@ const Home = () => {
       </div>
     { (ciudadesState.ciudades.length > 0) && 
       <div className='ciudades'>
-        <div className='spacer' />
         <h3 className='ciudades-title'>Destinos favoritos de Lexa</h3>
         {
           ciudadesState.ciudades.slice(0,4).map((ciudad: ICiudad) => {

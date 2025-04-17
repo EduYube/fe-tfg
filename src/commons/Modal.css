@@ -4,6 +4,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 999;
     background-color: rgba(0,0,0,0.5);
     align-items: center;
     justify-content: center;
@@ -16,16 +17,16 @@
     width: auto;
     min-height: 50vh;
     background: white;
-    position: relative;
     border-radius: 5px;
     box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
     padding: 20px;
 }
 
-.modal-logo{
+.modal-logo{ 
     width: 200px;
     height: auto;
-    padding-left: 32px;
+    display: block; 
+    margin: 0 auto;   
 }
 
 .modal-form{
@@ -64,10 +65,37 @@
     background-color: #614928;
 }
 
+.post-button {
+    color: white;
+    border-radius: 20px;
+    height: auto;
+    margin: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+    text-align: center;
+    border: darkgoldenrod;
+    background-color: #614928;
+    width: 50%;
+}
+
 .section-buttons{
     height: auto;
     width: auto;
     padding: 10px;
     text-align: center;
     align-items: center;
+}
+
+.post-box {
+    width: 33vw;
+    border-radius: 20px;
+    height: 200px;
+    margin: 15px;
+  }
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
 }
