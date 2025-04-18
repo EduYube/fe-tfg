@@ -19,5 +19,5 @@ function pubsReducer(pubsState: IPubs, action: IPubActions): IPubs {
 export function PubsStoreProvider(props: any) {
     const [pubsState, dispatch] = useReducer(pubsReducer, initialState)
     const {state: userState} = useLogin()
-    return (<PubStore.Provider value={{pubsState, dispatch, loged: userState.nick != '', admin: userState.admin}}>{props.children}</PubStore.Provider>)
+    return (<PubStore.Provider value={{pubsState, dispatch, loged: userState.nick != '', admin: userState.admin, user: userState.nick}}>{props.children}</PubStore.Provider>)
 }

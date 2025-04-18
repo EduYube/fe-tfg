@@ -8,7 +8,6 @@ export interface IPub {
     provinciaId: number,
     ciudadId: number,
     favorito: number,
-    comentarioId: number,
     text: string
 }
 
