@@ -4,7 +4,7 @@ export interface ICiudades {
 
 export interface ICiudad {
     id: number,
-    name: string,
+    nombre: string,
     provincia: string,
     provinciaId: number
 }

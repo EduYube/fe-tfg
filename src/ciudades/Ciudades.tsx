@@ -20,7 +20,7 @@ const CiudadesComp = () => {
     const [crear, setCrear] = useState(false)
     useEffect(() => {
       ciudadesState.ciudades.length === 0 && getCiudadesData() 
-    })
+    }, [])
 
     const getCiudadesData = async () => {
         await fetch(url).then((res) => {
@@ -35,11 +35,10 @@ const CiudadesComp = () => {
         })
       }
 
-    const postCiudadesData = async (name: string) => {
-        const provId = ciudadesState.ciudades.find((ciudad: ICiudad) => ciudad.provincia.toLowerCase() == prov).id
+    const postCiudadesData = async (nombre: string) => {
         const payload = JSON.stringify({
-        nombre: name,
-        provinciaId: provId
+        nombre: nombre,
+        provinciaId: prov
         })
         await fetch(url, {
             method: 'POST',
@@ -53,7 +52,7 @@ const CiudadesComp = () => {
 
     const putCiudadesData = async(oldCity: string, newCity: string) => {
         const oldVal: ICiudad = ciudadesState.ciudades.find((ciudad: ICiudad) => {
-            if (ciudad.name == oldCity){
+            if (ciudad.nombre == oldCity){
                 return ciudad
             }
         })
@@ -70,8 +69,8 @@ const CiudadesComp = () => {
 
     function Ciudad(_: any){
         return (
-        <Link to={'/publicacion/'+_.ciudad.name}>
-            <button className='ciudad-button'>{_.ciudad.name}</button>
+        <Link to={'/publicacion/'+_.ciudad.nombre}>
+            <button className='ciudad-button'>{_.ciudad.nombre}</button>
         </Link>
         )
     }

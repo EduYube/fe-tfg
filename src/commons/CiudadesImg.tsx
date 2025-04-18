@@ -3,7 +3,7 @@ import bilbao from '../assets/ciudades/bilbaofav.png'
 import peñiscola from '../assets/ciudades/peñiscolaFav.png'
 import covadonga from '../assets/ciudades/covadongaFav.png'
 
-interface ICiudadesImg {
+export interface ICiudadesImg {
     ciudad: string,
     img: string
 }

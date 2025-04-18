@@ -26,7 +26,7 @@ const ProvinciasComp = () => {
     const url = 'http://localhost:8080/provincias/'
     useEffect(() => {
         provState.provincias.length == 0 && getProvData()
-    })
+    }, [])
 
     const getProvData = async () => {
         const data = await fetch(url,{
@@ -38,9 +38,9 @@ const ProvinciasComp = () => {
             payload: dataJSON
             })
     }
-    const postProvData = async (name: string) => {
+    const postProvData = async (nombre: string) => {
         const payload = JSON.stringify({
-        nombre: name
+        nombre: nombre
         })
         await fetch(url, {
             method: 'POST',
@@ -56,7 +56,7 @@ const ProvinciasComp = () => {
     } 
     const putProvData = async(oldProv: string, newProv: string) => {
         const oldVal: IProvincia = provState.provincias.find((prov: IProvincia) => {
-            if (prov.name == oldProv){
+            if (prov.nombre == oldProv){
                 return prov
             }
         })
@@ -82,7 +82,7 @@ const ProvinciasComp = () => {
 
     function Provincia(_: any){
         const image = provs.find((prov) => {
-            if(prov.prov == _.value.name.toLowerCase()){
+            if(prov.prov == _.value.nombre.toLowerCase()){
             return prov
             }
         })
@@ -114,7 +114,8 @@ const ProvinciasComp = () => {
         </div>
         {
             provState.provincias.map((prov :IProvincia) => {
-                return( <Provincia value={prov} key={prov.id} />)
+                return( 
+                <Provincia value={prov} key={prov.id} />)
             })
         }
         <CreateModal 

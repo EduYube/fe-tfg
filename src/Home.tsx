@@ -25,7 +25,7 @@ const Home = () => {
   
     useEffect(() => {
       ciudadesState.ciudades.length === 0 && getCiudadesData() 
-    })
+    }, [])
   
     const getCiudadesData = async () => {
       await fetch(baseURL+'ciudades').then((res) => {

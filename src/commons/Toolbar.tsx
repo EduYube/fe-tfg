@@ -26,7 +26,7 @@ function ToolbarComponent(props: any) {
         setShowLogin(false)
         return dispatch({
             type: 'OUT',
-            payload: {name: '', password:'', admin: false}
+            payload: {nombre: '', password:'', admin: false}
         })
     }
 

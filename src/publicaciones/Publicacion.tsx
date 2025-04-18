@@ -14,22 +14,24 @@ const Publicaciones = () => {
 }
 const PubsComp = () => {
     const url = 'http://localhost:8080/publicaciones/'
-    const { id } = useParams()
+    const { ciudad } = useParams()
     const { dispatch, loged, admin} = useContext(PubStore)
     const [modal, showModal] = useState(false)
     const [crear, setCrear] = useState(false)
     const [pub, setPub] = useState<IPub>()
 
     useEffect(() => {
-        !pub && !modal && getPubsDeatilData(id) 
-    })
+        !pub && !modal && getPubsDeatilData(ciudad) 
+    }, [])
 
-    const getPubsDeatilData = async (id: string | undefined) => {
-        await fetch(url+id).then((res) => {
+    const getPubsDeatilData = async (ciudad: string | undefined) => {
+        await fetch(url+ciudad).then((res) => {
             if(res.ok){
               res.json().then((data) => {
-                if(data.length > 0){
-                    setPub(data[0])
+                if(data){
+                    setPub(data)
+                    setCrear(false)
+                    showModal(false)
                     return dispatch({
                     type: 'GET',
                     payload: data
@@ -37,12 +39,11 @@ const PubsComp = () => {
                 }  else {
                     setCrear(true)
                     showModal(true)
-                    return dispatch({
-                        type: 'GET',
-                        payload: {name: ''}
-                    })
                 }
               })
+            } else {
+                setCrear(true)
+                showModal(true)
             }
           })
     }
@@ -63,33 +64,31 @@ const PubsComp = () => {
     const image = (img: string) => {
         return `/publicaciones/${img}`
     }
-    const splited = pub?.image.split("\/")
-    const pubImg = splited ? splited[splited?.length-1] : ''
     return(<>
         <div className='section'>
-            <p className='section-title'>{pub?.ciudad?.toUpperCase()}</p>
+            <p className='section-title'>{ciudad?.toUpperCase()}</p>
             { admin && pub &&
                 <div className='section-buttons'>
                     <button className='crear-button' onClick={(e) => {
                         e.preventDefault()
                         setCrear(false)
-                        showModal(!modal)
+                        showModal(true)
                     }}> EDITAR PUBLICACIÓN</button> 
                 </div>
             }
         </div>
         { pub ?
             <div>
-                <img className='img-post' src={image(pubImg)} />
+                <img className='img-post' src={image(pub.img)} />
                 <p>{pub.text}</p>
-                { pub.comentario && <div>
+                { pub.comentarioId && <div>
                 <p className='section-comments'>COMENTARIOS</p>
-                <p className="comment-text">{pub.comentario}</p>
+                <p className="comment-text">{pub.comentarioId}</p>
                 </div>}
             </div> : 
             admin && <button className='crear-button' onClick={(e) => {
                 e.preventDefault()
-                showModal(!modal)
+                showModal(true)
                 setCrear(true)
             }}> CREAR PUBLICACIÓN</button> 
         }

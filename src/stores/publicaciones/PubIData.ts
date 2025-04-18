@@ -4,12 +4,11 @@ export interface IPubs{
 
 export interface IPub {
     id: number,
-    image: string,
-    provId: number,
-    ciudad: string,
+    img: string,
+    provinciaId: number,
     ciudadId: number,
-    favs: number,
-    comentario: string,
+    favorito: number,
+    comentarioId: number,
     text: string
 }
 

@@ -3,7 +3,7 @@ export interface IProvincias {
 }
 export interface IProvincia {
     id: number,
-    name: string,
+    nombre: string,
 }
 
 export interface IProvinciaAction {
