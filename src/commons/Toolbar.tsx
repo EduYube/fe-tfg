@@ -94,32 +94,50 @@ function ToolbarComponent(props: any) {
                     <h3 className='toolbar-title'>Tu sitio dogfriendly</h3>
                 </div>
                     { !loged ?
-                        <form className='toolbar-right'>     
-                            <div className={showLogin ? '' : 'none-vis'}>
-                                <button onClick={(e) => {
-                                    e.preventDefault()
-                                    setShowLogin(false)
-                                    setUser('')
-                                    setPass('')
-                                }} className='toolbar-close'>X</button>
-                                <input className='toolbar-input' value={user} onChange={(e) => {
-                                    e.preventDefault()
-                                    setUser(e.target.value)
-                                }} placeholder='Usuario'/>
-                                <input className='toolbar-input' value={pass} type='password' onChange={(e) =>{ 
-                                    e.preventDefault()
-                                    setPass(e.target.value)
-                                }} placeholder='Contraseña'/>
-                            </div>
-                            <button className='toolbar-button' onClick={(e) => {
-                                e.preventDefault()
-                                !showLogin ? setShowLogin(true) : login()
-                                }}>Ingresar</button>
-                            <button className='toolbar-button' onClick={(e) => {
-                                e.preventDefault()
-                                showRegister(!register)
-                            }}>Registrar</button>
-                        </form>  
+                        <form
+                        className="toolbar-right"
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          !showLogin ? setShowLogin(true) : login();
+                        }}
+                      >
+                        {showLogin && (
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setShowLogin(false);
+                                setUser("");
+                                setPass("");
+                              }}
+                              className="toolbar-close" >
+                              X
+                            </button>
+                            <input
+                              className="toolbar-input"
+                              value={user}
+                              onChange={(e) => setUser(e.target.value)}
+                              placeholder="Usuario" />
+                            <input
+                              className="toolbar-input"
+                              value={pass}
+                              type="password"
+                              onChange={(e) => setPass(e.target.value)}
+                              placeholder="Contraseña" />
+                          </>
+                        )}
+                      
+                        <button className="toolbar-button" type="submit">
+                          Ingresar
+                        </button>
+                        <button
+                          className="toolbar-button"
+                          type="button"
+                          onClick={() => showRegister(!register)}
+                        >
+                          Registrar
+                        </button>
+                      </form>
                         : <div className='toolbar-right'>
                             <h3 className='user-name'> Hola {state.nick} </h3> 
                             <img className='toolbar-out' src={out} onClick={(e) => {

@@ -67,7 +67,7 @@ const Home = () => {
   }
   function Ciudad(ciudad: any){
     const image = images.find((obj) => {
-      if(obj.ciudad == ciudad.value.name.toLowerCase()){
+      if(obj.ciudad == ciudad?.value.name?.toLowerCase()){
       return obj
       }
     })

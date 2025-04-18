@@ -95,7 +95,7 @@ const CiudadesComp = () => {
         <div className='cities-spacer' />
         {
             ciudadesState.ciudades.map((ciudad: ICiudad) => {
-                if (ciudad.provincia.toLowerCase() == prov) {
+                if (ciudad.provincia?.toLowerCase() == prov) {
                     return(<Ciudad ciudad={ ciudad } key={ciudad.id} />)
                 }
             })

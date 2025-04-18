@@ -82,7 +82,7 @@ const ProvinciasComp = () => {
 
     function Provincia(_: any){
         const image = provs.find((prov) => {
-            if(prov.prov == _.value.nombre.toLowerCase()){
+            if(prov.prov == _.value.nombre?.toLowerCase()){
             return prov
             }
         })
