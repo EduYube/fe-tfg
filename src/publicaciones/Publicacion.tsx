@@ -98,9 +98,10 @@ const PubsComp = () => {
     const image = (img: string) => {
         return `/publicaciones/${img.toLowerCase()}.png`
     }
+    const title = isNaN(parseInt(ciudad as string)) ? ciudad : pub?.img
     return(<>
         <div className='section'>
-            <p className='section-title'>{ciudad?.toUpperCase()}</p>
+            <p className='section-title'>{title?.toUpperCase()}</p>
             { admin && pub &&
                 <div className='section-buttons'>
                     <button className='crear-button' onClick={(e) => {
