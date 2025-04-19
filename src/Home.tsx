@@ -1,6 +1,3 @@
-import { useContext, useEffect } from 'react'
-import { CiudadesStore, CiudadesStoreProvider } from './stores/ciudades/CiudadStore'
-import { ICiudad } from './stores/ciudades/CiudadIData'
 import { Link } from 'react-router-dom'
 import logoIg from './assets/logos/Logo-Insta.png'
 import logoX from './assets/logos/Logo-Twitter.png'
@@ -8,37 +5,45 @@ import logoPin from './assets/logos/Logo-Pinterest.png'
 import logoCont from './assets/logos/Logo-Contacto.png'
 import images from './commons/CiudadesImg'
 import './Home.css';
+import { PubsStoreProvider, PubStore } from './stores/publicaciones/PubStore'
+import { use, useContext, useEffect } from 'react'
+import { IPub } from './stores/publicaciones/PubIData'
 
 const Home = () => {
   return (
     <>
-      <CiudadesStoreProvider>
+      <PubsStoreProvider>
         <Dashboard />
-      </CiudadesStoreProvider>
+      </PubsStoreProvider>
     </>
   )
 }
 
   const Dashboard = () => {
-    const { ciudadesState, dispatch: ciudadesDispatch } = useContext(CiudadesStore)
+    const { pubsState, dispatch } = useContext (PubStore)
     const baseURL = 'http://localhost:8080/'
-  
-    useEffect(() => {
-      ciudadesState.ciudades.length === 0 && getCiudadesData() 
-    }, [])
-  
-    const getCiudadesData = async () => {
-      await fetch(baseURL+'ciudades').then((res) => {
+
+    useEffect( () => {
+      pubsState.pubs.length == 0 && getPubsData()
+      },[]
+    )
+
+    function getPubsData(){
+      fetch(baseURL + 'publicaciones').then((res) => {
         if(res.ok){
-          res.json().then( (data) => {
-            return ciudadesDispatch({
-              type: 'GET',
-              payload: data
-            })
+          res.json().then((data) => {
+            console.log(data)
+            if(data){
+              dispatch({
+                type: 'GET',
+                payload: data
+              })
+            }
           })
         }
       })
     }
+  
     return (<>
       <div className='main-nav'>
       <Link className='nav-text' to='/provincias'>Destinos</Link>
@@ -51,11 +56,11 @@ const Home = () => {
             <img className='nav-logo' src={logoCont} />
         </div>
       </div>
-    { (ciudadesState.ciudades.length > 0) && 
+    { images.length > 0 && 
       <div className='ciudades'>
         <h3 className='ciudades-title'>Destinos favoritos de Lexa</h3>
         {
-          ciudadesState.ciudades.slice(0,4).map((ciudad: ICiudad) => {
+          images.map((ciudad: any) => {
             return(
               <Ciudad value={ciudad} key={ciudad.id}/>
             )
@@ -63,11 +68,37 @@ const Home = () => {
         }
       </div>
     }
+    { pubsState.pubs.length > 0 && <>
+      <h3 className='ciudades-title'>Últimas publicaciones de Lexa</h3>
+      <div className='pubs'>
+      {
+        pubsState.pubs.reverse().slice(0,2).map((pub: IPub) => {
+          return(
+            <Pubs value={pub} key={pub.id}/>
+          )
+        })
+      }
+      </div>
+      </>
+    }
     </>);
   }
+
+  function Pubs(pub: any){
+    const image = `/publicaciones/${pub.value.ciudad.toLowerCase()}.png`
+    return(<>
+        <div className='pub-card'>
+          <Link to={'/publicacion/'+pub.value.ciudad} key={pub.id} className='pub-content'>
+            <img className='pub-img' src={image} />
+            <p className='pub-text'>{pub.value.image}</p>
+          </Link>
+        </div>
+    </>)
+  }
+
   function Ciudad(ciudad: any){
     const image = images.find((obj) => {
-      if(obj.ciudad == ciudad?.value.name?.toLowerCase()){
+      if(obj.ciudad == ciudad?.value.ciudad?.toLowerCase()){
       return obj
       }
     })

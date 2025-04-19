@@ -13,10 +13,6 @@
     color: white;
   }
   
-  .Home-link {
-    color: #61dafb;
-  }
-  
   .main-nav{
     background-color: #cca881;
     display: flex;
@@ -68,35 +64,79 @@
     height: 40px;
     width: auto;
   }
-  .ciudades {
-    display: inline;
-    width: 100vw;
-    height: auto;
-  }
-  
-  .ciudades-img{
-    display: inline;
-    width: 450px;
-    border-radius: 20px;
-    height: auto;
-    margin: 30px;
-  }
   
   .ciudades-title {
     font-size: 32px;
-    margin-right: 75%;
+    width: 100%;
     color: #614928;
+    margin-bottom: 16px;
+    margin-left: 28px;
+  }
+
+  .ciudades {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    justify-items: center;
+    width: 100%;
+    padding: 16px;
+  }
+  
+  .ciudades-img {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 20px;
+    height: auto;
   }
   
   .spacer {
     height: 250px;
   }
-  
-  
-  .img-post{
-    width: 450px;
-    border-radius: 20px;
-    height: auto;
-    margin: 30px;
-  }
-  
+
+  .pubs {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.pub-card {
+  width: 48%;             
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 16px;
+  margin-right: 16px;
+  box-sizing: border-box;
+}
+
+.pub-content {
+  display: flex;
+  flex-direction: row;    
+  align-items: center;
+  width: 100%;             
+  gap: 12px;              
+  text-decoration: none;
+}
+
+.pub-img {
+  width: 60%;
+  border-radius: 20px;
+  height: auto;
+  margin-right: 16px;
+}
+
+.pub-text {
+  font-family: 'Poppins';
+  font-size: x-large;
+  border-radius: 50px;
+  text-align: center;
+  width: 40%;
+  padding: 16px;
+  border: 3px solid #614928;
+  background-color: rgb(204, 168, 129);
+  color: black;
+}

@@ -3,8 +3,9 @@ export interface IPubs{
 }
 
 export interface IPub {
+    ciudad: string,
     id: number,
-    img: string,
+    image: string,
     provinciaId: number,
     ciudadId: number,
     favorito: number,

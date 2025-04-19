@@ -113,7 +113,7 @@ const PubsComp = () => {
         </div>
         { pub && <div className='comments'>
             <div className='container'>
-                <img className='img-post' src={image(pub.img)} />
+                <img className='img-post' src={image(pub.image)} />
                 <p className='content-right'>{pub.text}</p>
             </div>
             { comentarioState.comentarios.length > 0 && 
