@@ -9,7 +9,6 @@ export const ComentarioStore = React.createContext<IComentarios | any>(initialSt
 
 function comentarioReducer(comentarioState: IComentarios, comentarioAction: IComentarioAction): IComentarios {
     
-    console.log(comentarioState.comentarios)
     switch(comentarioAction.type){
         case 'GET': {
             return{ ...comentarioState, comentarios: comentarioAction.payload}

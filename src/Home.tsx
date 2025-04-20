@@ -6,7 +6,7 @@ import logoCont from './assets/logos/Logo-Contacto.png'
 import images from './commons/CiudadesImg'
 import './Home.css';
 import { PubsStoreProvider, PubStore } from './stores/publicaciones/PubStore'
-import { use, useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { IPub } from './stores/publicaciones/PubIData'
 
 const Home = () => {
@@ -21,6 +21,7 @@ const Home = () => {
 
   const Dashboard = () => {
     const { pubsState, dispatch } = useContext (PubStore)
+    const [pubs, setPubs] = useState<IPub[]>([])
     const baseURL = 'http://localhost:8080/'
 
     useEffect( () => {
@@ -32,8 +33,8 @@ const Home = () => {
       fetch(baseURL + 'publicaciones').then((res) => {
         if(res.ok){
           res.json().then((data) => {
-            console.log(data)
             if(data){
+              setPubs(data)
               dispatch({
                 type: 'GET',
                 payload: data
@@ -72,9 +73,9 @@ const Home = () => {
       <h3 className='ciudades-title'>Últimas publicaciones de Lexa</h3>
       <div className='pubs'>
       {
-        pubsState.pubs.reverse().slice(0,2).map((pub: IPub) => {
+        pubs.slice(pubs.length-2,2).map((pub: IPub) => {
           return(
-            <Pubs value={pub} key={pub.id}/>
+            <Pubs value={pub} pubKey={pub.id}/>
           )
         })
       }

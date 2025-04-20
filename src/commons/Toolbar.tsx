@@ -65,7 +65,6 @@ function ToolbarComponent(props: any) {
             body: JSON.stringify(creat)
             }
         ).then((res) => {
-            console.log(res)
             if(res.ok){
                 setShowError(false)
                 res.json().then(data => {
