@@ -46,6 +46,8 @@ const Home = () => {
     }
   
     return (<>
+
+      {console.log(pubs)}
       <div className='main-nav'>
       <Link className='nav-text' to='/provincias'>Destinos</Link>
         <button className='nav-text'>Sobre Nosotros</button>
@@ -73,7 +75,7 @@ const Home = () => {
       <h3 className='ciudades-title'>Últimas publicaciones de Lexa</h3>
       <div className='pubs'>
       {
-        pubs.slice(pubs.length-2,2).map((pub: IPub) => {
+        pubs.slice(pubs.length-2,pubs.length).map((pub: IPub) => {
           return(
             <Pubs value={pub} pubKey={pub.id}/>
           )
@@ -86,6 +88,7 @@ const Home = () => {
   }
 
   function Pubs(pub: any){
+    console.log(pub)
     const image = `/publicaciones/${pub.value.ciudad.toLowerCase()}.png`
     return(<>
         <div className='pub-card'>

@@ -1,7 +1,7 @@
-import cariño from '../assets/ciudades/cariñoFav.png'
-import bilbao from '../assets/ciudades/bilbaofav.png'
-import peñiscola from '../assets/ciudades/peñiscolaFav.png'
-import covadonga from '../assets/ciudades/covadongaFav.png'
+import cariño from '../assets/ciudades/cariño.png'
+import bilbao from '../assets/ciudades/bilbao.png'
+import peñiscola from '../assets/ciudades/peñiscola.png'
+import covadonga from '../assets/ciudades/covadonga.png'
 
 export interface ICiudadesImg {
     ciudad: string,
