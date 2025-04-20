@@ -138,11 +138,14 @@ function ToolbarComponent(props: any) {
                         </button>
                       </form>
                         : <div className='toolbar-right'>
-                            <h3 className='user-name'> Hola {state.nick} </h3> 
-                            <img className='toolbar-out' src={out} onClick={(e) => {
-                                e.preventDefault()
-                                logOut()
-                            }}/>
+                            <Link to='/usuarios'>
+                                <h3 className='user-name'> Hola {state.nick} </h3> 
+                            </Link>
+                            <Link to='/'>
+                                <img className='toolbar-out' src={out} onClick={(e) => {
+                                    logOut()
+                                }}/>
+                            </Link>
                         </div>
                     }
                 <Modal 
@@ -154,6 +157,7 @@ function ToolbarComponent(props: any) {
                     errorState={showError}
                     error={error} 
                     show={setShowError}
+                    action={() => {}}
                 />
             </div>
     </>)

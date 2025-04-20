@@ -129,6 +129,7 @@ const ProvinciasComp = () => {
             errorState={showError}
             error={error} 
             show={setShowError}
+            action={() => {}}
         />
     </>)
 }

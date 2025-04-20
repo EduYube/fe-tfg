@@ -27,6 +27,13 @@
 }
 
 .error-close {
+    top: 0;
+    left: 0;
+    display: flex;
+    background-color: whitesmoke;
+}
+
+.error-confirm{
     height: fit-content;
     background-color: whitesmoke;
 }

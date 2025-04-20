@@ -1,6 +1,6 @@
 export interface ILogin {
     nick: string,
-    pass: string,
+    password: string,
     admin: boolean,
     loged: boolean
 }

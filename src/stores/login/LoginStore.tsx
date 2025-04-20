@@ -3,7 +3,7 @@ import { ILogin, ILoginAction } from "./LoginIData"
 
 const initialState: ILogin = {
     nick: '',
-    pass: '',
+    password: '',
     admin: false,
     loged: false
 }
@@ -13,13 +13,13 @@ export const UserStore = React.createContext<ILogin | any>(initialState)
 function userReducer(state: ILogin, action: ILoginAction): ILogin {
     switch(action.type){
         case 'LOGIN': {
-            return { nick: action.payload.nick, pass: '', admin: action.payload.admin, loged: true}
+            return { nick: action.payload.nick, password: action.payload.password, admin: action.payload.admin, loged: true}
         }
         case 'OUT': {
-            return {nick: '', pass: '', admin: false, loged: false}
+            return {nick: '', password: '', admin: false, loged: false}
         }
         case 'REG': {
-            return { nick: action.payload.nick, pass: '', admin: action.payload.admin ,loged: true}
+            return { nick: action.payload.nick, password: '', admin: action.payload.admin ,loged: true}
         }
         default: return {...state}
     }
