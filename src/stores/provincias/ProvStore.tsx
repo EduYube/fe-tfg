@@ -1,6 +1,6 @@
 import React, { useReducer } from "react"
 import { IProvincias, IProvinciaAction } from "./ProvIData";
-import { useLogin } from "../users/UserStore"; 
+import { useLogin } from "../login/LoginStore"; 
 
 const initialState: IProvincias = {
     provincias: []

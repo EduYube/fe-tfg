@@ -1,11 +1,11 @@
-export interface IUser {
+export interface ILogin {
     nick: string,
     pass: string,
     admin: boolean,
     loged: boolean
 }
 
-export interface IUserAction {
+export interface ILoginAction {
     type: string,
-    payload: IUser,
+    payload: ILogin,
 }

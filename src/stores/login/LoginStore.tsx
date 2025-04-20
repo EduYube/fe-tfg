@@ -1,16 +1,16 @@
 import React, {useContext, useReducer} from "react"
-import { IUser, IUserAction } from "./UserIData"
+import { ILogin, ILoginAction } from "./LoginIData"
 
-const initialState: IUser = {
+const initialState: ILogin = {
     nick: '',
     pass: '',
     admin: false,
     loged: false
 }
 
-export const UserStore = React.createContext<IUser | any>(initialState)
+export const UserStore = React.createContext<ILogin | any>(initialState)
 
-function userReducer(state: IUser, action: IUserAction): IUser {
+function userReducer(state: ILogin, action: ILoginAction): ILogin {
     switch(action.type){
         case 'LOGIN': {
             return { nick: action.payload.nick, pass: '', admin: action.payload.admin, loged: true}

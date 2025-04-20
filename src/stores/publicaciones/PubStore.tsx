@@ -1,6 +1,6 @@
 import React, { useReducer } from "react"
 import {  IPubActions, IPubs } from "./PubIData"
-import { useLogin } from "../users/UserStore"
+import { useLogin } from "../login/LoginStore"
 
 const initialState: IPubs = {
     pubs: []

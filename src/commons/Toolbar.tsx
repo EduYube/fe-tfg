@@ -4,7 +4,7 @@ import out from '../assets/logos/Logo-Out.svg';
 import encabezado from '../assets/encabezado.png';
 import logo from '../assets/logos/Logo-LVDL.png';
 import { useState, useContext } from 'react';
-import { UserStore, UserStoreProvider } from '../stores/users/UserStore';
+import { UserStore, UserStoreProvider } from '../stores/login/LoginStore';
 import Modal from './Modal';
 import Error from './Error';
 
