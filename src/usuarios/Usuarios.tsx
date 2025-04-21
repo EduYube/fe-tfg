@@ -40,7 +40,6 @@ const getUsuariosData = async () => {
 }
 
 const putUser = async (user: any) => {
-    console.log(user)
     await fetch(url+'/usuarios', {
         method: 'PUT',
         body: JSON.stringify(user)
@@ -150,8 +149,6 @@ const usuario = usuarios.length > 0 ? usuarios.find((it: IUsuario) => {
 }) : user
     
     return (<>
-    {console.log(usuarios)}
-    {console.log(usuario)}
         {user && <> 
             <div className='section'>
               <p className='user-title'>Panel de usuario</p>

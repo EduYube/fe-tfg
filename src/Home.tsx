@@ -52,8 +52,6 @@ const Home = () => {
     }
   
     return (<>
-
-      {console.log(pubs)}
       <div className='main-nav'>
       <Link className='nav-text' to='/provincias'>Destinos</Link>
         <button className='nav-text'>Sobre Nosotros</button>
@@ -98,7 +96,6 @@ const Home = () => {
   }
 
   function Pubs(pub: any){
-    console.log(pub)
     const image = `/publicaciones/${pub.value.ciudad.toLowerCase()}.png`
     return(<>
         <div className='pub-card'>

@@ -116,7 +116,6 @@ const PubsComp = () => {
     }
 
     return(<>
-    {console.log(pub)}
         <div className='section'>
             <p className='section-title'>{ciudad?.toUpperCase()}</p>
             { admin && pub &&
