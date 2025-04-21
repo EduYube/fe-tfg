@@ -6,6 +6,7 @@ import './Pubs.css'
 import PostModal from "../commons/PostModal"
 import { ComentarioStore, ComentarioStoreProvider } from "../stores/comentario/ComentarioStore"
 import { IComentario } from "../stores/comentario/ComentarioIData"
+import Info from "../commons/Info"
 
 const Publicaciones = () => {
     return(<>
@@ -25,6 +26,8 @@ const PubsComp = () => {
     const [crear, setCrear] = useState(false)
     const [pub, setPub] = useState<IPub>()
     const [comentario, setComentario] = useState('')
+    const [error, setError] = useState('')
+    const [showError, setShowError] = useState(false)
 
     useEffect(() => {
         !pub && !modal && getPubsDeatilData(ciudad) 
@@ -41,6 +44,9 @@ const PubsComp = () => {
                         })
                     }
                 })
+            } else {
+                setError('No se han podido cargar los comentarios')
+                setShowError(true)
             }
         })
     }
@@ -53,6 +59,9 @@ const PubsComp = () => {
         }).then((res) => {
             if(res.ok){
                 getComentarios(id)
+            } else {
+                setError('No se ha podido crear el comentario')
+                setShowError(true)
             }
         })
     }
@@ -71,13 +80,23 @@ const PubsComp = () => {
                     payload: data
                     })
                 }  else {
-                    setCrear(true)
-                    showModal(true)
+                    if(admin){
+                        setCrear(true)
+                        showModal(true)
+                    } else {
+                        setError('No hay publicaciones para esta ciudad')
+                        setShowError(true)
+                    }
                 }
               })
             } else {
-                setCrear(true)
-                showModal(true)
+                if(admin){
+                    setCrear(true)
+                    showModal(true)
+                } else {
+                    setError('No hay publicaciones para esta ciudad')
+                    setShowError(true)
+                }
             }
           })
     }
@@ -90,15 +109,14 @@ const PubsComp = () => {
         }).then((res) => {
             if(res.ok) {
                 setPub(JSON.parse(publi))
-                getPubsDeatilData(pub?.id.toString())
+                getPubsDeatilData(ciudad)
                 return
             }
         })
     }
-    const image = (img: string) => {
-        return `/publicaciones/${img.toLowerCase()}.png`
-    }
+
     return(<>
+    {console.log(pub)}
         <div className='section'>
             <p className='section-title'>{ciudad?.toUpperCase()}</p>
             { admin && pub &&
@@ -113,7 +131,7 @@ const PubsComp = () => {
         </div>
         { pub && <div className='comments'>
             <div className='container'>
-                <img className='img-post' src={image(pub.image)} />
+                <img className='img-post' src={`/publicaciones/${pub.image?.toLowerCase()}.png`} />
                 <p className='content-right'>{pub.text}</p>
             </div>
             { comentarioState.comentarios.length > 0 && 
@@ -158,6 +176,10 @@ const PubsComp = () => {
             show={showModal}
             postModal={postPub}
         />
+        <Info 
+            infoState={showError}
+            info={error} 
+            show={setShowError} />
     </>)
 }
 

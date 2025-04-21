@@ -1,27 +1,27 @@
 import React  from "react";
-import './Error.css'
+import './Info.css'
 
-interface ErrorProps {
-    errorState: boolean;
-    error: string;
+interface InfoProps {
+    infoState: boolean;
+    info: string;
     show: (value: boolean) => void;
-    action: () => void;
+    action?: () => void;
 }
 
-const Error: React.FC<ErrorProps> = ({ errorState, error, show, action }) => {
+const Info: React.FC<InfoProps> = ({ infoState, info, show, action }) => {
     return (
         <>
-            {errorState && 
+            {infoState && 
                 <div className="overlay">
                     <div className="error-container">
                         <button className='error-close' onClick={(e) => { 
                             e.preventDefault()
-                            show(!errorState)}}>X</button>
-                        <h2 className="error-text">{error}</h2>
+                            show(false)}}>X</button>
+                        <h2 className="error-text">{info}</h2>
                         <button className="error-confirm" onClick={(e) => {
                             e.preventDefault()
-                            action()
-                            show(!errorState)
+                            action?.()
+                            show(false)
                         }}>OK</button>
                     </div>
                 </div>
@@ -30,4 +30,4 @@ const Error: React.FC<ErrorProps> = ({ errorState, error, show, action }) => {
     )
 }
 
-export default Error;
+export default Info;

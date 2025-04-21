@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import provs from '../commons/ProvImgs'
 import CreateModal from '../commons/CreateModal'
-import Error from "../commons/Error"
+import Info from "../commons/Info"
 import './Prov.css'
 
 const Provincias = () => {
@@ -31,12 +31,20 @@ const ProvinciasComp = () => {
     const getProvData = async () => {
         const data = await fetch(url,{
             method: 'GET'
+            }).then((res) => {
+                if(res.ok){
+                    res.json().then((data) => {
+                        return dispatch({
+                            type: 'GET',
+                            payload: data
+                        })
+                    })
+                } else {
+                    setError('No se han podido cargar las provincias')
+                    setShowError(true)
+                }
             })
-        const dataJSON = await data.json()
-            return dispatch({
-            type: 'GET',
-            payload: dataJSON
-            })
+        return data
     }
     const postProvData = async (nombre: string) => {
         const payload = JSON.stringify({
@@ -125,11 +133,10 @@ const ProvinciasComp = () => {
             postModal={postProvData}
             putModal={putProvData}
         />
-        <Error 
-            errorState={showError}
-            error={error} 
+        <Info 
+            infoState={showError}
+            info={error} 
             show={setShowError}
-            action={() => {}}
         />
     </>)
 }

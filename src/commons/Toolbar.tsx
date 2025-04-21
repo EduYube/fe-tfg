@@ -6,7 +6,7 @@ import logo from '../assets/logos/Logo-LVDL.png';
 import { useState, useContext } from 'react';
 import { UserStore, UserStoreProvider } from '../stores/login/LoginStore';
 import Modal from './Modal';
-import Error from './Error';
+import Info from './Info';
 
 function ToolbarComponent(props: any) {
     const {state, dispatch} = useContext(UserStore);
@@ -153,11 +153,10 @@ function ToolbarComponent(props: any) {
                     show={showRegister} 
                     postUser={postUser}
                 />
-                <Error 
-                    errorState={showError}
-                    error={error} 
+                <Info 
+                    infoState={showError}
+                    info={error} 
                     show={setShowError}
-                    action={() => {}}
                 />
             </div>
     </>)

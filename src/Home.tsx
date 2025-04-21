@@ -8,6 +8,7 @@ import './Home.css';
 import { PubsStoreProvider, PubStore } from './stores/publicaciones/PubStore'
 import { useContext, useEffect, useState } from 'react'
 import { IPub } from './stores/publicaciones/PubIData'
+import Info from './commons/Info'
 
 const Home = () => {
   return (
@@ -22,6 +23,8 @@ const Home = () => {
   const Dashboard = () => {
     const { pubsState, dispatch } = useContext (PubStore)
     const [pubs, setPubs] = useState<IPub[]>([])
+    const [error, setError] = useState('')
+    const [modal, showModal] = useState(false)
     const baseURL = 'http://localhost:8080/'
 
     useEffect( () => {
@@ -41,6 +44,9 @@ const Home = () => {
               })
             }
           })
+        } else {
+          setError('No se han podido cargar las publicaciones')
+          showModal(true)
         }
       })
     }
@@ -84,6 +90,10 @@ const Home = () => {
       </div>
       </>
     }
+    <Info 
+      infoState={modal}
+      show={showModal}
+      info={error} />
     </>);
   }
 

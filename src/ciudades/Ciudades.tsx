@@ -4,6 +4,7 @@ import { CiudadesStore, CiudadesStoreProvider } from "../stores/ciudades/CiudadS
 import { Link, useParams } from 'react-router-dom'
 import './Ciudades.css'
 import CreateModal from '../commons/CreateModal'
+import Info from '../commons/Info'
 
 const Ciudades = () => {
     return(<>
@@ -17,7 +18,9 @@ const CiudadesComp = () => {
     const url = 'http://localhost:8080/ciudades/'
     const { prov } = useParams()
     const [modal, showModal] = useState(false)
+    const [showError, setShowError] = useState(false)
     const [crear, setCrear] = useState(false)
+    const [error, setError] = useState('')
     useEffect(() => {
       ciudadesState.ciudades.length === 0 && getCiudadesData() 
     }, [])
@@ -31,6 +34,9 @@ const CiudadesComp = () => {
                 payload: data
               })
             })
+          } else {
+            setShowError(true)
+            setError('No se han podido cargar las ciudades');
           }
         })
       }
@@ -46,6 +52,9 @@ const CiudadesComp = () => {
             }).then((res) => {
             if(res.ok){
                 getCiudadesData()
+            } else {
+                setShowError(true)
+                setError('No se ha podido crear la ciudad');
             }
         })
     } 
@@ -63,6 +72,9 @@ const CiudadesComp = () => {
                 }).then((res) => {
                     if(res.ok){
                         getCiudadesData()
+                    } else {
+                        setShowError(true)
+                        setError('No se ha podido editar la ciudad');
                     }
             })
     }
@@ -107,6 +119,10 @@ const CiudadesComp = () => {
             postModal={postCiudadesData}
             putModal={putCiudadesData}
         />
+        <Info
+            infoState={showError}
+            info={error}
+            show={setShowError} />
     </>)
 }
 

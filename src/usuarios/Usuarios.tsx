@@ -4,6 +4,7 @@ import './Usuarios.css'
 import { IUsuario } from "../stores/usuarios/UsuarioIData"
 import ojoAbierto from '../assets/ojo-abierto.png'
 import ojoCerrado from '../assets/ojo-cerrado.png'
+import Info from "../commons/Info"
 
 const Usuarios = () => {
     return (
@@ -38,7 +39,8 @@ const getUsuariosData = async () => {
     })
 }
 
-const putUser = async (user: IUsuario) => {
+const putUser = async (user: any) => {
+    console.log(user)
     await fetch(url+'/usuarios', {
         method: 'PUT',
         body: JSON.stringify(user)
@@ -61,8 +63,12 @@ const deleteUser = async (nick: any) => {
 }
 
 const Usuario = (_: any) => {
-        const [ nick, setNick ] = useState(_.value.nick)
-        const [ admin, setAdmin ] = useState(_.value.admin == 1)
+    const oldNick = _.value.nick
+    const [ nick, setNick ] = useState(_.value.nick)
+    const [ admin, setAdmin ] = useState(_.value.admin == 1)
+    const [info, setInfo] = useState('')
+    const [modal, setModal] = useState(false)
+    const [modalAction, setModalAction] = useState<() => void>(() => {});
     return (
         <>
             <input className="alias-input" type="text" value={nick} onChange={(e) => {
@@ -74,21 +80,34 @@ const Usuario = (_: any) => {
             onChange={() => {
                 setAdmin(!admin)
             }}/>
-            <button className="delete-btn" title="Eliminar usuario" onClick={(e) => {
-                deleteUser({nick: nick})
+            <button className="delete-btn" title="Eliminar usuario" onClick={() => {
+                setModal(true)
+                setInfo('¿Está seguro de que desea eliminar el usuario?')
+                setModalAction(() => () => {
+                    deleteUser({nick: nick})
+                })
             }}>🗑️</button>
-            <button className="edit-btn" onClick={(e) => {
-                putUser({nick: nick, password: _.value.password, admin: admin ? 1 : 0})
+            <button className="edit-btn" onClick={() => {
+                setModal(true)
+                setInfo('¿Está seguro de que desea eliminar el usuario?')
+                setModalAction(() => () => {
+                    putUser({oldNick: oldNick, nick: nick, password: _.value.password, admin: admin ? 1 : 0})
+                })
             }}>✏️</button>
+            <Info infoState={modal} info={info} show={setModal} action={modalAction}/>
         </>
         )
 }
 
 
 const UsuarioPropio = (_: any) => {
-        const [ nick, setNick ] = useState(_.value.nick)
-        const [ password, setPassword ] = useState(_.value.password)
-        const [ showPass, setShowPass ] = useState(false)
+    const oldNick = _.value.nick
+    const [ nick, setNick ] = useState(_.value.nick)
+    const [ password, setPassword ] = useState(_.value.password)
+    const [ showPass, setShowPass ] = useState(false)
+    const [info, setInfo] = useState('')
+    const [modal, setModal] = useState(false)
+    const [modalAction, setModalAction] = useState<() => void>(() => {});
     return (
         <>
             <input className="alias-input" type="text" value={nick} onChange={(e) => {
@@ -107,12 +126,20 @@ const UsuarioPropio = (_: any) => {
                 </button>
             </div>
             <button className="delete-btn" title="Eliminar usuario" onClick={() => {
-                deleteUser({nick: nick})
+                setModal(true)
+                setInfo('¿Está seguro de que desea eliminar el usuario?')
+                setModalAction(() => () => {
+                    deleteUser({nick: nick})
+                })
             }}>🗑️</button>
-            <button className="edit-btn" onClick={(e) => {
-                e.preventDefault()
-                putUser({nick: nick, password: password, admin: _.value.admin})
+            <button className="edit-btn" onClick={() => {
+                setModal(true)
+                setInfo('¿Está seguro de que desea modificar el usuario?')
+                setModalAction(() => () => {
+                    putUser({oldNick: oldNick, nick: nick, password: password, admin: _.value.admin})
+                })
             }}>✏️</button>
+            <Info infoState={modal} info={info} show={setModal} action={modalAction}/>
         </>
         )
 }
@@ -136,7 +163,7 @@ const usuario = usuarios.length > 0 ? usuarios.find((it: IUsuario) => {
                 <div className="grid-header">Password</div>
                 <div className="grid-header">Eliminar</div>
                 <div className="grid-header">Editar</div>
-                <UsuarioPropio value={usuario} key={user.nick} />
+                <UsuarioPropio value={usuario} key={usuario.nick} />
             </div>
             { user.admin &&
             <>
